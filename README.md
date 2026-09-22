@@ -1,8 +1,8 @@
 # Comparador de precios de Gas LP a domicilio (autotanque)
 
-Proyecto final — Curso de integración con LLM
+Proyecto final — Estrategias de Integración
 
-**Estudiante:** [Tu nombre]
+**Estudiante:** Emmanuel Torres
 
 ## El caso
 
