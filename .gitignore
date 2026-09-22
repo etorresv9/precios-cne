@@ -3,3 +3,4 @@ secrets/bsg-infraestructura-d07a410ad072.json
 __pycache__
 *.pyc
 .venv
+.env.example
