@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.8, pytest-8.3.4, pluggy-1.6.0 -- /Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /Users/etorres/BSG/estrategias-integracion-llm-main/proyecto-final
+configfile: pytest.ini
+plugins: repeat-0.9.4, xdist-3.8.0, asyncio-1.3.0, rerunfailures-16.7, langsmith-0.8.5, deepeval-4.2.3, anyio-4.13.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 2 items
+
+tests/test_evaluacion_deepeval.py::test_caso_1_peticion_valida PASSED    [ 50%]
+tests/test_evaluacion_deepeval.py::test_caso_2_peticion_valida_condicion_distinta PASSED [100%]Running teardown with pytest sessionfinish...
+
+
+=============================== warnings summary ===============================
+tests/test_evaluacion_deepeval.py::test_caso_1_peticion_valida
+  /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/deepeval/utils.py:211: DeprecationWarning: There is no current event loop
+    loop = asyncio.get_event_loop()
+
+tests/test_evaluacion_deepeval.py::test_caso_1_peticion_valida
+tests/test_evaluacion_deepeval.py::test_caso_1_peticion_valida
+tests/test_evaluacion_deepeval.py::test_caso_2_peticion_valida_condicion_distinta
+tests/test_evaluacion_deepeval.py::test_caso_2_peticion_valida_condicion_distinta
+  /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/google/genai/_api_client.py:1026: DeprecationWarning: Inheritance class AiohttpClientSession from ClientSession is discouraged
+    class AiohttpClientSession(aiohttp.ClientSession):  # type: ignore[misc]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 2 passed, 5 warnings in 24.13s ========================

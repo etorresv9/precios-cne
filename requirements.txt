@@ -1,7 +1,7 @@
 # --- Servicio web ---
 fastapi==0.115.6
 uvicorn[standard]==0.34.0
-pydantic==2.10.4
+pydantic>=2.11.7
 
 # --- Cliente HTTP para consultar la API de precios (CNE) ---
 httpx==0.28.1
@@ -11,14 +11,15 @@ google-genai>=1.20.0
 google-auth==2.37.0
 
 # --- Configuración / variables de entorno ---
-python-dotenv==1.0.1
+python-dotenv>=1.1.1
 
 # --- Trazabilidad ---
 langfuse>=3.0.0
 openinference-instrumentation-google-genai
 
 # --- Evaluación ---
-deepeval==2.4.4
+deepeval>=4.2.0
+pytest==8.3.4
 
 # --- Utilidades ---
 python-dateutil==2.9.0.post0

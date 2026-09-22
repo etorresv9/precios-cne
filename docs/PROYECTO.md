@@ -127,3 +127,71 @@ headers explícitos (`Accept-Language`) que redujeron la tasa de fallo
 original (~100% sin los headers) pero no la eliminaron por completo. Se
 considera un riesgo operativo documentado del proveedor, no un defecto del
 servicio propio.
+
+## Evaluación (sesión 5)
+
+**Métrica:** G-Eval (`FidelidadRecomendacion`), evaluada con el propio
+Gemini 3.5 Flash como juez vía Vertex AI. Criterio: la recomendación debe
+identificar al distribuidor con el precio por litro más bajo entre los
+datos provistos, sin inventar distribuidores, precios o ubicaciones que no
+aparezcan en el contexto. Umbral: 0.7.
+
+Para los casos 3, 4 y 5 (contrato y manejo de errores) se usan pruebas
+deterministas con `pytest`, ya que no involucran texto generado por el LLM
+y deben ser 100% reproducibles — a diferencia del fallo real de la CNE, que
+es intermitente y no se puede provocar bajo demanda, por lo que el caso 5
+se simula con un mock que reproduce el error real observado.
+
+| # | Caso | Método | Resultado esperado | Resultado obtenido | Conclusión |
+|---|---|---|---|---|---|
+| 1 | Petición válida (Torreón/Albia) | G-Eval | Recomienda al distribuidor de menor precio, sin inventar datos | PASSED (score ≥ 0.7) | El LLM identifica correctamente el precio mínimo real |
+| 2 | Válida, condición distinta (Saltillo) | G-Eval | Igual que el caso 1, con otra ubicación | PASSED (score ≥ 0.7) | Se confirma que el criterio generaliza a datos distintos |
+| 3 | Datos faltantes (< 2 paradas) | pytest determinista | `422` antes de tocar la CNE o el LLM | PASSED | Pydantic bloquea la solicitud en el borde del sistema, como se diseñó |
+| 4 | Datos inválidos (IDs mal formados) | pytest determinista | `422`, sin llamada externa | PASSED | El regex de `entidad_id`/`municipio_id` rechaza formatos incorrectos |
+| 5 | Fallo de proveedor (CNE no responde) | pytest determinista (mock) | `502 api_externa_no_disponible`, sin llamar al LLM | PASSED | El manejo de errores aísla el fallo externo del resto del flujo; corresponde al error real e intermitente documentado arriba |
+
+Evidencia completa: `evidencias/sesion-05/pytest-resultados.txt` y
+`evidencias/sesion-05/deepeval-resultados.txt`.
+
+## Plan de operación (borrador)
+
+**Alcance:** Servicio de un solo endpoint (`POST /comparar-ruta`) para uso
+interno/demostrativo. No incluye autenticación de usuarios finales más allá
+de la API key compartida, ni persistencia de datos (cada solicitud es
+independiente).
+
+**Acceso:** Requiere credenciales propias de cada operador:
+- Cuenta de servicio de Google Cloud con rol `Vertex AI User` (Gemini)
+- Cuenta en Langfuse (trazabilidad)
+- API key propia del servicio (`API_KEY` en `.env`)
+
+**Costo estimado:** Dominado por las llamadas a Gemini 3.5 Flash vía Vertex
+AI (tarifa por token de entrada/salida) y, en menor medida, por el volumen
+de trazas en Langfuse si se excede el tier gratuito. La consulta a la CNE
+no tiene costo (API pública sin autenticación). Con el volumen de pruebas
+de este proyecto, el costo se mantuvo dentro del nivel gratuito/mínimo de
+ambos servicios.
+
+**Mantenimiento:**
+- Revisar periódicamente que el endpoint de la CNE
+  (`api-reportediario.cne.gob.mx`) siga vigente — ya cambió una vez de
+  dominio (de `cre.gob.mx` a `cne.gob.mx`) tras la disolución de la CRE en
+  2025, y podría volver a cambiar.
+- Vigilar la disponibilidad del modelo `gemini-3.5-flash` en la región de
+  Vertex AI configurada, ya que Google actualiza periódicamente qué
+  modelos están disponibles por región.
+
+**Responsables:** Emmanuel Torres — desarrollo, configuración y mantenimiento
+del servicio.
+
+**Qué hacer ante un fallo:**
+- **Fallo de la CNE** (el más frecuente, ~30-40% intermitente): el
+  servicio ya reintenta automáticamente; si persiste tras 5 intentos,
+  responde `502` de forma controlada. No requiere intervención manual salvo
+  que el fallo se vuelva permanente (posible cambio de endpoint).
+- **Fallo de Gemini/Vertex AI** (cuota excedida, `429`): reintentar más
+  tarde o revisar el tier de facturación del proyecto de Google Cloud.
+- **Fallo de Langfuse**: no bloquea el servicio (la instrumentación falla
+  de forma silenciosa si las credenciales son inválidas), pero se pierde
+  trazabilidad de esas ejecuciones — revisar `LANGFUSE_PUBLIC_KEY` /
+  `LANGFUSE_SECRET_KEY` en `.env`.
