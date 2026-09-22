@@ -1,0 +1,88 @@
+{
+  "num_ejecuciones": 5,
+  "duracion_s_cliente_min": 8.714,
+  "duracion_s_cliente_max": 27.131,
+  "duracion_s_cliente_promedio": 17.807,
+  "tiempo_s_cne_promedio": 4.722,
+  "tiempo_s_llm_promedio": 7.022,
+  "condiciones": {
+    "tipo": "ejecuciones secuenciales de la misma solicitud (no es prueba de carga)",
+    "entorno": "local",
+    "pausa_entre_ejecuciones_s": 15,
+    "payload": {
+      "paradas": [
+        {
+          "entidad_id": "05",
+          "municipio_id": "035",
+          "localidad_id": "448",
+          "etiqueta": "Torreón (Antonio Guerrero)"
+        },
+        {
+          "entidad_id": "05",
+          "municipio_id": "035",
+          "localidad_id": "143",
+          "etiqueta": "Albia"
+        }
+      ]
+    }
+  },
+  "ejecuciones": [
+    {
+      "ejecucion": 1,
+      "fecha_hora_utc": "2026-09-21T03:37:50.549521+00:00",
+      "url": "http://127.0.0.1:8000/comparar-ruta",
+      "codigo_http": 200,
+      "duracion_s_cliente": 13.6,
+      "tiempos_servidor": {
+        "tiempo_cne_s": 6.049,
+        "tiempo_llm_s": 7.395,
+        "tiempo_total_s": 13.444
+      },
+      "error": null
+    },
+    {
+      "ejecucion": 2,
+      "fecha_hora_utc": "2026-09-21T03:38:19.156550+00:00",
+      "url": "http://127.0.0.1:8000/comparar-ruta",
+      "codigo_http": 502,
+      "duracion_s_cliente": 26.394,
+      "tiempos_servidor": null,
+      "error": "{\"codigo\":\"api_externa_no_disponible\",\"mensaje\":\"No se pudo obtener precios de la CNE para una parada.\",\"detalle\":\"No se pudo consultar la CNE tras 5 intentos: CNEAPIError(\\\"La CNE reportó un error: ['Referencia a objeto no establecida como instancia de un objeto.']\\\")\"}"
+    },
+    {
+      "ejecucion": 3,
+      "fecha_hora_utc": "2026-09-21T03:39:00.555202+00:00",
+      "url": "http://127.0.0.1:8000/comparar-ruta",
+      "codigo_http": 200,
+      "duracion_s_cliente": 8.714,
+      "tiempos_servidor": {
+        "tiempo_cne_s": 1.89,
+        "tiempo_llm_s": 6.764,
+        "tiempo_total_s": 8.654
+      },
+      "error": null
+    },
+    {
+      "ejecucion": 4,
+      "fecha_hora_utc": "2026-09-21T03:39:24.277936+00:00",
+      "url": "http://127.0.0.1:8000/comparar-ruta",
+      "codigo_http": 200,
+      "duracion_s_cliente": 13.194,
+      "tiempos_servidor": {
+        "tiempo_cne_s": 6.227,
+        "tiempo_llm_s": 6.908,
+        "tiempo_total_s": 13.135
+      },
+      "error": null
+    },
+    {
+      "ejecucion": 5,
+      "fecha_hora_utc": "2026-09-21T03:39:52.479354+00:00",
+      "url": "http://127.0.0.1:8000/comparar-ruta",
+      "codigo_http": 502,
+      "duracion_s_cliente": 27.131,
+      "tiempos_servidor": null,
+      "error": "{\"codigo\":\"api_externa_no_disponible\",\"mensaje\":\"No se pudo obtener precios de la CNE para una parada.\",\"detalle\":\"No se pudo consultar la CNE tras 5 intentos: CNEAPIError(\\\"La CNE reportó un error: ['Referencia a objeto no establecida como instancia de un objeto.']\\\")\"}"
+    }
+  ]
+}
