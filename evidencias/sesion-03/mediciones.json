@@ -1,10 +1,10 @@
 {
   "num_ejecuciones": 5,
-  "duracion_s_cliente_min": 8.714,
-  "duracion_s_cliente_max": 27.131,
-  "duracion_s_cliente_promedio": 17.807,
-  "tiempo_s_cne_promedio": 4.722,
-  "tiempo_s_llm_promedio": 7.022,
+  "duracion_s_cliente_min": 7.411,
+  "duracion_s_cliente_max": 9.059,
+  "duracion_s_cliente_promedio": 7.877,
+  "tiempo_s_cne_promedio": 1.704,
+  "tiempo_s_llm_promedio": 6.097,
   "condiciones": {
     "tipo": "ejecuciones secuenciales de la misma solicitud (no es prueba de carga)",
     "entorno": "local",
@@ -29,60 +29,68 @@
   "ejecuciones": [
     {
       "ejecucion": 1,
-      "fecha_hora_utc": "2026-09-21T03:37:50.549521+00:00",
+      "fecha_hora_utc": "2026-09-22T04:11:22.525248+00:00",
       "url": "http://127.0.0.1:8000/comparar-ruta",
       "codigo_http": 200,
-      "duracion_s_cliente": 13.6,
+      "duracion_s_cliente": 9.059,
       "tiempos_servidor": {
-        "tiempo_cne_s": 6.049,
-        "tiempo_llm_s": 7.395,
-        "tiempo_total_s": 13.444
+        "tiempo_cne_s": 2.207,
+        "tiempo_llm_s": 6.706,
+        "tiempo_total_s": 8.913
       },
       "error": null
     },
     {
       "ejecucion": 2,
-      "fecha_hora_utc": "2026-09-21T03:38:19.156550+00:00",
+      "fecha_hora_utc": "2026-09-22T04:11:46.586210+00:00",
       "url": "http://127.0.0.1:8000/comparar-ruta",
-      "codigo_http": 502,
-      "duracion_s_cliente": 26.394,
-      "tiempos_servidor": null,
-      "error": "{\"codigo\":\"api_externa_no_disponible\",\"mensaje\":\"No se pudo obtener precios de la CNE para una parada.\",\"detalle\":\"No se pudo consultar la CNE tras 5 intentos: CNEAPIError(\\\"La CNE reportó un error: ['Referencia a objeto no establecida como instancia de un objeto.']\\\")\"}"
+      "codigo_http": 200,
+      "duracion_s_cliente": 7.696,
+      "tiempos_servidor": {
+        "tiempo_cne_s": 1.552,
+        "tiempo_llm_s": 6.085,
+        "tiempo_total_s": 7.637
+      },
+      "error": null
     },
     {
       "ejecucion": 3,
-      "fecha_hora_utc": "2026-09-21T03:39:00.555202+00:00",
+      "fecha_hora_utc": "2026-09-22T04:12:09.286010+00:00",
       "url": "http://127.0.0.1:8000/comparar-ruta",
       "codigo_http": 200,
-      "duracion_s_cliente": 8.714,
+      "duracion_s_cliente": 7.411,
       "tiempos_servidor": {
-        "tiempo_cne_s": 1.89,
-        "tiempo_llm_s": 6.764,
-        "tiempo_total_s": 8.654
+        "tiempo_cne_s": 1.61,
+        "tiempo_llm_s": 5.739,
+        "tiempo_total_s": 7.35
       },
       "error": null
     },
     {
       "ejecucion": 4,
-      "fecha_hora_utc": "2026-09-21T03:39:24.277936+00:00",
+      "fecha_hora_utc": "2026-09-22T04:12:31.697275+00:00",
       "url": "http://127.0.0.1:8000/comparar-ruta",
       "codigo_http": 200,
-      "duracion_s_cliente": 13.194,
+      "duracion_s_cliente": 7.528,
       "tiempos_servidor": {
-        "tiempo_cne_s": 6.227,
-        "tiempo_llm_s": 6.908,
-        "tiempo_total_s": 13.135
+        "tiempo_cne_s": 1.558,
+        "tiempo_llm_s": 5.913,
+        "tiempo_total_s": 7.471
       },
       "error": null
     },
     {
       "ejecucion": 5,
-      "fecha_hora_utc": "2026-09-21T03:39:52.479354+00:00",
+      "fecha_hora_utc": "2026-09-22T04:12:54.228271+00:00",
       "url": "http://127.0.0.1:8000/comparar-ruta",
-      "codigo_http": 502,
-      "duracion_s_cliente": 27.131,
-      "tiempos_servidor": null,
-      "error": "{\"codigo\":\"api_externa_no_disponible\",\"mensaje\":\"No se pudo obtener precios de la CNE para una parada.\",\"detalle\":\"No se pudo consultar la CNE tras 5 intentos: CNEAPIError(\\\"La CNE reportó un error: ['Referencia a objeto no establecida como instancia de un objeto.']\\\")\"}"
+      "codigo_http": 200,
+      "duracion_s_cliente": 7.693,
+      "tiempos_servidor": {
+        "tiempo_cne_s": 1.591,
+        "tiempo_llm_s": 6.044,
+        "tiempo_total_s": 7.634
+      },
+      "error": null
     }
   ]
 }
