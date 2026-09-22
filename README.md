@@ -1,8 +1,8 @@
 # Comparador de precios de Gas LP por recipiente (CNE)
 
-Proyecto final — Curso de integración con LLM
+Proyecto final — Estrategias de Integración
 
-**Estudiante:** [Tu nombre]
+**Estudiante:** Emmanuel Torres
 
 ## El caso
 
