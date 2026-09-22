@@ -1,31 +1,32 @@
-# Comparador de precios de Gas LP por recipiente (CNE)
+# Comparador de precios de Gas LP a domicilio (autotanque)
 
-Proyecto final — Estrategias de Integración
+Proyecto final — Curso de integración con LLM
 
-**Estudiante:** Emmanuel Torres
+**Estudiante:** [Tu nombre]
 
 ## El caso
 
-Un consumidor que usa Gas LP en cilindro (tanque portátil) quiere saber, antes
-de salir de su casa, en qué planta de distribución cercana conviene cargarlo
-para pagar menos por kilogramo. El servicio consulta datos públicos oficiales
-de la Comisión Nacional de Energía (CNE) para varias ubicaciones, filtra
-precios inválidos o atípicos, y usa un modelo de lenguaje (Gemini 3.5 Flash)
-para redactar una recomendación clara a partir de esos datos ya verificados.
+Un consumidor con tanque estacionario en casa o negocio quiere decidir a qué
+distribuidor pedirle que mande un camión (autotanque) a llenarlo, sin tener
+que investigar precios manualmente en varias fuentes. El servicio consulta
+datos públicos oficiales de la Comisión Nacional de Energía (CNE) para
+varias ubicaciones, filtra precios inválidos o atípicos, y usa un modelo de
+lenguaje (Gemini 3.5 Flash) para redactar una recomendación clara a partir
+de esos datos ya verificados.
 
 - **API externa:** CNE — endpoint público `api-reportediario.cne.gob.mx`
   (sin autenticación), descubierto inspeccionando la página de consulta de
   precios de Gas LP: https://www.cne.gob.mx/ConsultaPrecios/GasLP/PlantaDistribucion.html
 - **Entrada:** una lista de ubicaciones (entidad/municipio/localidad, según
   el catálogo de la CNE).
-- **Salida:** distribuidores con precio por kg y capacidad de recipiente,
-  por ubicación, más una recomendación en texto.
+- **Salida:** distribuidores con precio por litro, por ubicación, más una
+  recomendación en texto sobre a quién pedirle el servicio a domicilio.
 - **Qué aporta el LLM:** interpreta los precios ya validados y redacta una
   recomendación breve para el consumidor; no decide qué consultar ni puede
   alterar los datos.
 - **Qué valida el código:** formato de los IDs de ubicación, cantidad mínima
-  de ubicaciones, rango razonable de precio y capacidad, autorización por
-  API key, y reintentos ante fallos intermitentes de la CNE.
+  de ubicaciones, rango razonable de precio, autorización por API key, y
+  reintentos ante fallos intermitentes de la CNE.
 
 ## Requisitos previos
 
@@ -90,8 +91,8 @@ curl -X POST http://127.0.0.1:8000/comparar-ruta \
 ```
 
 Una respuesta exitosa incluye, por ubicación, los distribuidores con precio
-por kg y capacidad de recipiente, más una `recomendacion` en texto y un
-`langfuse_trace_id` para verificar la traza en Langfuse.
+por litro, más una `recomendacion` en texto y un `langfuse_trace_id` para
+verificar la traza en Langfuse.
 
 ### Mediciones (sesión 3)
 
@@ -116,12 +117,12 @@ proyecto-final/
   .env.example
   requirements.txt
   schemas.py          # Contrato Pydantic (entrada/salida/errores)
-  cne_client.py        # Cliente de la API pública de la CNE
-  llm_client.py         # Cliente de Gemini 3.5 Flash (Vertex AI)
-  main.py               # Endpoint FastAPI
-  medir.py              # Script de mediciones (sesión 3)
+  cne_client.py         # Cliente de la API pública de la CNE
+  llm_client.py          # Cliente de Gemini 3.5 Flash (Vertex AI)
+  main.py                # Endpoint FastAPI
+  medir.py               # Script de mediciones (sesión 3)
   docs/
-    PROYECTO.md          # Ficha del caso, diagrama de arquitectura, decisiones
+    PROYECTO.md           # Ficha del caso, diagrama de arquitectura, decisiones
   evidencias/
     sesion-02/
     sesion-03/

@@ -10,105 +10,43 @@
             "distribuidores": [
                 {
                     "numero_permiso": "LP/13727/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE TORREON, S.A. DE C.V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 22.0,
-                    "parada_etiqueta": "Torreón (Antonio Guerrero)"
-                },
-                {
-                    "numero_permiso": "LP/13727/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE TORREON, S.A. DE C.V.",
-                    "capacidad_kg": 45.0,
-                    "precio_kg": 22.0,
+                    "marca_comercial": "Combustibles y Gases de Torreón, S. A. de C. V.",
+                    "precio_litro": 10.94,
                     "parada_etiqueta": "Torreón (Antonio Guerrero)"
                 },
                 {
                     "numero_permiso": "LP/14121/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE TORREON, S.A. DE C.V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 19.93,
-                    "parada_etiqueta": "Torreón (Antonio Guerrero)"
-                },
-                {
-                    "numero_permiso": "LP/14121/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE TORREON, S.A. DE C.V.",
-                    "capacidad_kg": 45.0,
-                    "precio_kg": 19.93,
+                    "marca_comercial": "Combustibles y Gases de Torreón, S. A. de C. V.",
+                    "precio_litro": 10.94,
                     "parada_etiqueta": "Torreón (Antonio Guerrero)"
                 },
                 {
                     "numero_permiso": "LP/14188/DIST/PLA/2016",
                     "marca_comercial": "Intergas del Norte, S.A. de C.V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 25.48,
-                    "parada_etiqueta": "Torreón (Antonio Guerrero)"
-                },
-                {
-                    "numero_permiso": "LP/14188/DIST/PLA/2016",
-                    "marca_comercial": "Intergas del Norte, S.A. de C.V.",
-                    "capacidad_kg": 20.0,
-                    "precio_kg": 22.09,
-                    "parada_etiqueta": "Torreón (Antonio Guerrero)"
-                },
-                {
-                    "numero_permiso": "LP/14188/DIST/PLA/2016",
-                    "marca_comercial": "Intergas del Norte, S.A. de C.V.",
-                    "capacidad_kg": 45.0,
-                    "precio_kg": 22.09,
+                    "precio_litro": 10.94,
                     "parada_etiqueta": "Torreón (Antonio Guerrero)"
                 },
                 {
                     "numero_permiso": "LP/14225/DIST/PLA/2016",
-                    "marca_comercial": "CENTRAL DE GAS DE CHIHUAHUA, S.A. DE C.V.",
-                    "capacidad_kg": 20.0,
-                    "precio_kg": 22.1,
-                    "parada_etiqueta": "Torreón (Antonio Guerrero)"
-                },
-                {
-                    "numero_permiso": "LP/14225/DIST/PLA/2016",
-                    "marca_comercial": "CENTRAL DE GAS DE CHIHUAHUA, S.A. DE C.V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 22.1,
-                    "parada_etiqueta": "Torreón (Antonio Guerrero)"
-                },
-                {
-                    "numero_permiso": "LP/14225/DIST/PLA/2016",
-                    "marca_comercial": "CENTRAL DE GAS DE CHIHUAHUA, S.A. DE C.V.",
-                    "capacidad_kg": 45.0,
-                    "precio_kg": 22.1,
-                    "parada_etiqueta": "Torreón (Antonio Guerrero)"
-                },
-                {
-                    "numero_permiso": "LP/14225/DIST/PLA/2016",
-                    "marca_comercial": "CENTRAL DE GAS DE CHIHUAHUA, S.A. DE C.V.",
-                    "capacidad_kg": 1.0,
-                    "precio_kg": 22.0,
-                    "parada_etiqueta": "Torreón (Antonio Guerrero)"
-                },
-                {
-                    "numero_permiso": "LP/14443/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE ACUÑA, S.A. DE C.V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 22.05,
-                    "parada_etiqueta": "Torreón (Antonio Guerrero)"
-                },
-                {
-                    "numero_permiso": "LP/14443/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE ACUÑA, S.A. DE C.V.",
-                    "capacidad_kg": 45.0,
-                    "precio_kg": 22.05,
+                    "marca_comercial": "Central de Gas de Chihuahua, S. A. de C. V.",
+                    "precio_litro": 11.88,
                     "parada_etiqueta": "Torreón (Antonio Guerrero)"
                 },
                 {
                     "numero_permiso": "LP/14559/DIST/PLA/2016",
-                    "marca_comercial": "Coragas, S. A. de C. V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 20.26,
+                    "marca_comercial": "CORAGAS, S.A. DE C.V.",
+                    "precio_litro": 10.94,
+                    "parada_etiqueta": "Torreón (Antonio Guerrero)"
+                },
+                {
+                    "numero_permiso": "LP/14894/DIST/PLA/2016",
+                    "marca_comercial": "GRUPO CENTURION COMBUSTIBLES, S.A.P.I. DE C.V.",
+                    "precio_litro": 10.88,
                     "parada_etiqueta": "Torreón (Antonio Guerrero)"
                 }
             ],
-            "precio_kg_minimo": 19.93,
-            "precio_kg_promedio": 21.87
+            "precio_litro_minimo": 10.88,
+            "precio_litro_promedio": 11.086666666666666
         },
         {
             "parada": {
@@ -120,114 +58,52 @@
             "distribuidores": [
                 {
                     "numero_permiso": "LP/13727/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE TORREON, S.A. DE C.V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 22.0,
-                    "parada_etiqueta": "Albia"
-                },
-                {
-                    "numero_permiso": "LP/13727/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE TORREON, S.A. DE C.V.",
-                    "capacidad_kg": 45.0,
-                    "precio_kg": 22.0,
+                    "marca_comercial": "Combustibles y Gases de Torreón, S. A. de C. V.",
+                    "precio_litro": 10.94,
                     "parada_etiqueta": "Albia"
                 },
                 {
                     "numero_permiso": "LP/14121/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE TORREON, S.A. DE C.V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 19.93,
-                    "parada_etiqueta": "Albia"
-                },
-                {
-                    "numero_permiso": "LP/14121/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE TORREON, S.A. DE C.V.",
-                    "capacidad_kg": 45.0,
-                    "precio_kg": 19.93,
+                    "marca_comercial": "Combustibles y Gases de Torreón, S. A. de C. V.",
+                    "precio_litro": 10.94,
                     "parada_etiqueta": "Albia"
                 },
                 {
                     "numero_permiso": "LP/14188/DIST/PLA/2016",
                     "marca_comercial": "Intergas del Norte, S.A. de C.V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 25.48,
-                    "parada_etiqueta": "Albia"
-                },
-                {
-                    "numero_permiso": "LP/14188/DIST/PLA/2016",
-                    "marca_comercial": "Intergas del Norte, S.A. de C.V.",
-                    "capacidad_kg": 20.0,
-                    "precio_kg": 22.09,
-                    "parada_etiqueta": "Albia"
-                },
-                {
-                    "numero_permiso": "LP/14188/DIST/PLA/2016",
-                    "marca_comercial": "Intergas del Norte, S.A. de C.V.",
-                    "capacidad_kg": 45.0,
-                    "precio_kg": 22.09,
+                    "precio_litro": 10.94,
                     "parada_etiqueta": "Albia"
                 },
                 {
                     "numero_permiso": "LP/14225/DIST/PLA/2016",
-                    "marca_comercial": "CENTRAL DE GAS DE CHIHUAHUA, S.A. DE C.V.",
-                    "capacidad_kg": 20.0,
-                    "precio_kg": 22.1,
-                    "parada_etiqueta": "Albia"
-                },
-                {
-                    "numero_permiso": "LP/14225/DIST/PLA/2016",
-                    "marca_comercial": "CENTRAL DE GAS DE CHIHUAHUA, S.A. DE C.V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 22.1,
-                    "parada_etiqueta": "Albia"
-                },
-                {
-                    "numero_permiso": "LP/14225/DIST/PLA/2016",
-                    "marca_comercial": "CENTRAL DE GAS DE CHIHUAHUA, S.A. DE C.V.",
-                    "capacidad_kg": 45.0,
-                    "precio_kg": 22.1,
-                    "parada_etiqueta": "Albia"
-                },
-                {
-                    "numero_permiso": "LP/14225/DIST/PLA/2016",
-                    "marca_comercial": "CENTRAL DE GAS DE CHIHUAHUA, S.A. DE C.V.",
-                    "capacidad_kg": 1.0,
-                    "precio_kg": 22.0,
-                    "parada_etiqueta": "Albia"
-                },
-                {
-                    "numero_permiso": "LP/14443/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE ACUÑA, S.A. DE C.V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 22.05,
-                    "parada_etiqueta": "Albia"
-                },
-                {
-                    "numero_permiso": "LP/14443/DIST/PLA/2016",
-                    "marca_comercial": "COMBUSTIBLES Y GASES DE ACUÑA, S.A. DE C.V.",
-                    "capacidad_kg": 45.0,
-                    "precio_kg": 22.05,
+                    "marca_comercial": "Central de Gas de Chihuahua, S. A. de C. V.",
+                    "precio_litro": 11.88,
                     "parada_etiqueta": "Albia"
                 },
                 {
                     "numero_permiso": "LP/14559/DIST/PLA/2016",
-                    "marca_comercial": "Coragas, S. A. de C. V.",
-                    "capacidad_kg": 30.0,
-                    "precio_kg": 20.26,
+                    "marca_comercial": "CORAGAS, S.A. DE C.V.",
+                    "precio_litro": 10.94,
+                    "parada_etiqueta": "Albia"
+                },
+                {
+                    "numero_permiso": "LP/14894/DIST/PLA/2016",
+                    "marca_comercial": "GRUPO CENTURION COMBUSTIBLES, S.A.P.I. DE C.V.",
+                    "precio_litro": 10.88,
                     "parada_etiqueta": "Albia"
                 }
             ],
-            "precio_kg_minimo": 19.93,
-            "precio_kg_promedio": 21.87
+            "precio_litro_minimo": 10.88,
+            "precio_litro_promedio": 11.086666666666666
         }
     ],
-    "recomendacion": "Te conviene cargar en **COMBUSTIBLES Y GASES DE TORREON, S.A. DE C.V.** (permiso LP/14121/DIST/PLA/2016) en cualquiera de las dos ubicaciones (**Torreón o Albia**). Ofrecen el precio más económico de la lista con **$19.93/kg** para cilindros de 30 kg y 45 kg, lo que representa el mayor ahorro directo para tu bolsillo.",
+    "recomendacion": "Para ambas zonas, te conviene solicitar el servicio a domicilio a **GRUPO CENTURION COMBUSTIBLES, S.A.P.I. DE C.V.** (permiso LP/14894/DIST/PLA/2016). Ofrecen el precio más bajo de la lista (**$10.88/litro**), lo que te permitirá llenar tu tanque estacionario al mejor costo, de forma cómoda y sin salir de casa.",
     "modelo_llm": "gemini-3.5-flash",
-    "fecha_consulta": "2026-09-22T03:34:37.974251Z",
+    "fecha_consulta": "2026-09-22T04:04:42.657740Z",
     "tiempos": {
-        "tiempo_cne_s": 1.963,
-        "tiempo_llm_s": 7.787,
-        "tiempo_total_s": 9.749
+        "tiempo_cne_s": 2.033,
+        "tiempo_llm_s": 6.561,
+        "tiempo_total_s": 8.594
     },
-    "langfuse_trace_id": "d09dd9d3c7cf8ab16e79a713065bd9a2"
+    "langfuse_trace_id": "2cb0b3a0c2537ca1711d62fa0296094f"
 }

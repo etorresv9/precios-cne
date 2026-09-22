@@ -1,7 +1,8 @@
 """
 Cliente para la API pública de la Comisión Nacional de Energía (CNE):
-precios de Gas LP por recipiente (cilindro), reportados por permisionarios
-de Planta de Distribución para venta directa al consumidor.
+precios de Gas LP por autotanque (reparto a domicilio para llenado de
+tanque estacionario), reportados por permisionarios de Planta de
+Distribución.
 
 Endpoint descubierto inspeccionando las peticiones de red de:
 https://www.cne.gob.mx/ConsultaPrecios/GasLP/PlantaDistribucion.html
@@ -22,19 +23,19 @@ ESPERA_BASE_S = 1.5  # backoff exponencial: 1.5s, 3s, 6s, 12s entre intentos
 
 BASE_URL = "https://api-reportediario.cne.gob.mx/api/PlantaDistribucion/precio"
 
-# Techo razonable de precio por KILOGRAMO (pesos MXN) para descartar precios
+# Techo razonable de precio por LITRO (pesos MXN) para descartar precios
 # atípicos como el 0.01 observado en el feed. Ajustar si el mercado cambia.
-PRECIO_KG_MAXIMO_RAZONABLE = 60.0
+PRECIO_LITRO_MAXIMO_RAZONABLE = 50.0
 
 
 class CNEAPIError(Exception):
     """La API externa de la CNE no respondió o respondió con un error."""
 
 
-async def consultar_precios_recipiente(parada: ParadaRuta) -> list[DistribuidorComparado]:
+async def consultar_precios_autotanque(parada: ParadaRuta) -> list[DistribuidorComparado]:
     """
-    Consulta los precios de Gas LP por recipiente (cilindro) para una
-    ubicación específica y devuelve solo los registros con precio válido.
+    Consulta los precios de Gas LP por autotanque (reparto a domicilio) para
+    una ubicación específica y devuelve solo los registros con precio válido.
     """
     params = {
         "entidadId": parada.entidad_id,
@@ -91,17 +92,14 @@ async def consultar_precios_recipiente(parada: ParadaRuta) -> list[DistribuidorC
             f"No se pudo consultar la CNE tras {MAX_INTENTOS} intentos: {ultimo_error!r}"
         ) from ultimo_error
 
-    recipientes = data.get("Value", {}).get("Recipientes", []) or []
+    autotanques = data.get("Value", {}).get("AutoTanques", []) or []
 
     distribuidores: list[DistribuidorComparado] = []
-    for item in recipientes:
+    for item in autotanques:
         precio = item.get("Precio")
-        capacidad = item.get("CapacidadRecipiente")
-        # Filtro de control: descarta precios o capacidades inválidas/atípicas
-        # ANTES de que lleguen al LLM o a la respuesta final.
-        if precio is None or precio <= 0 or precio > PRECIO_KG_MAXIMO_RAZONABLE:
-            continue
-        if capacidad is None or capacidad <= 0:
+        # Filtro de control: descarta precios inválidos o atípicos ANTES
+        # de que lleguen al LLM o a la respuesta final.
+        if precio is None or precio <= 0 or precio > PRECIO_LITRO_MAXIMO_RAZONABLE:
             continue
 
         # .get(..., default) no cubre el caso en que la llave existe pero su
@@ -113,8 +111,7 @@ async def consultar_precios_recipiente(parada: ParadaRuta) -> list[DistribuidorC
             DistribuidorComparado(
                 numero_permiso=numero_permiso,
                 marca_comercial=marca_comercial,
-                capacidad_kg=capacidad,
-                precio_kg=precio,
+                precio_litro=precio,
                 parada_etiqueta=parada.etiqueta,
             )
         )

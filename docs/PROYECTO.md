@@ -1,10 +1,11 @@
-# Proyecto Final — Comparador de precios de Gas LP por recipiente
+# Proyecto Final — Comparador de precios de Gas LP a domicilio (autotanque)
 
 ## Ficha del caso
 
-**Usuario:** Un consumidor de Gas LP que tiene su propio cilindro/recipiente
-y quiere saber a qué planta de distribución ir a cargarlo pagando el menor
-precio posible.
+**Usuario:** Un consumidor de Gas LP con tanque estacionario (instalado en
+su casa o negocio) que quiere decidir a qué distribuidor pedirle que mande
+un camión (autotanque) a llenarlo, comparando precios entre varias zonas o
+distribuidores disponibles.
 
 **Entrada:** Una lista de ubicaciones (entidad/municipio/localidad del
 catálogo de la CNE) que el consumidor está dispuesto a considerar.
@@ -20,8 +21,8 @@ Ejemplo:
 ```
 
 **Salida:** Por cada ubicación, los distribuidores disponibles con su precio
-por kg y capacidad de recipiente, más una recomendación en texto de a dónde
-ir y por qué.
+por litro, más una recomendación en texto sobre a quién conviene pedirle el
+servicio a domicilio y por qué.
 
 Ejemplo (resumido):
 ```json
@@ -30,12 +31,12 @@ Ejemplo (resumido):
     {
       "parada": {"etiqueta": "Torreón (Antonio Guerrero)"},
       "distribuidores": [
-        {"marca_comercial": "GRUPO CENTURION COMBUSTIBLES, S.A.P.I. DE C.V.", "precio_kg": 10.88, "capacidad_kg": 30.0}
+        {"marca_comercial": "GRUPO CENTURION COMBUSTIBLES, S.A.P.I. DE C.V.", "precio_litro": 10.88}
       ],
-      "precio_kg_minimo": 10.88
+      "precio_litro_minimo": 10.88
     }
   ],
-  "recomendacion": "Te conviene cargar en...",
+  "recomendacion": "Te conviene pedirle el servicio a...",
   "modelo_llm": "gemini-3.5-flash"
 }
 ```
@@ -45,9 +46,8 @@ recomendación en lenguaje natural — no decide qué consultar ni puede
 inventar cifras que no estén en los datos.
 
 **Qué valida el código:** Formato de los IDs de ubicación (regex), mínimo 2
-ubicaciones, rango razonable de precio (`$0 < precio_kg ≤ $60`) y capacidad
-(`> 0 kg`), autorización por API key, y reintentos ante fallos
-intermitentes de la CNE.
+ubicaciones, rango razonable de precio (`$0 < precio_litro ≤ $50`),
+autorización por API key, y reintentos ante fallos intermitentes de la CNE.
 
 **Qué pasa si falla:** Si la CNE no responde tras 5 intentos →
 `502 api_externa_no_disponible`; si ninguna ubicación tiene distribuidores
@@ -63,18 +63,18 @@ flowchart TD
     B -->|inválida/ausente| B1[401 sin_autorizacion]
     B -->|válida| C{Validación Pydantic<br/>ComparacionRutaGasLPRequest}
     C -->|paradas < 2 o IDs mal formados| C1[422 datos_invalidos /<br/>datos_faltantes]
-    C -->|válida| D[Por cada ubicación]
+    C -->|válida| D[Por cada ubicación/zona]
 
-    D --> E[Consulta API CNE<br/>api-reportediario.cne.gob.mx<br/>Recipientes, con reintentos + backoff]
+    D --> E[Consulta API CNE<br/>api-reportediario.cne.gob.mx<br/>AutoTanques, con reintentos + backoff]
     E -->|falla tras 5 intentos| E1[502 api_externa_no_disponible]
-    E -->|responde| F[Filtro: 0 < precio_kg ≤ 60<br/>y capacidad_kg > 0]
+    E -->|responde| F[Filtro: 0 < precio_litro ≤ 50]
 
     F --> G{¿Alguna ubicación<br/>con distribuidores?}
     G -->|no| G1[404 sin_resultados]
     G -->|sí| H[Construir prompt determinista<br/>con datos ya validados]
 
     H --> I[Gemini 3.5 Flash<br/>vía Vertex AI]
-    I --> J[Recomendación en texto<br/>para el consumidor]
+    I --> J[Recomendación en texto:<br/>a quién pedirle el camión]
 
     J --> K[Respuesta: ComparacionRutaGasLPResponse<br/>resultados + recomendación + tiempos + trace_id]
 
@@ -100,20 +100,23 @@ aproximación que el modelo decida buscar o interpretar por su cuenta.
 
 El LLM entra únicamente **después** de que el código ya validó, consultó y
 filtró los datos; su única función es redactar la recomendación en lenguaje
-natural, dirigida a un consumidor final, a partir de información que ya no
-puede alterar.
+natural, dirigida a un consumidor que va a pedir el servicio por teléfono o
+app, a partir de información que ya no puede alterar.
 
-## Decisión: precio por recipiente (kg) en vez de precio por autotanque (litro)
+## Decisión: precio por autotanque (litro) en vez de precio por recipiente (kg)
 
 La CNE reporta dos tarifas distintas para Gas LP en su endpoint de Planta de
 Distribución: `AutoTanques` (precio por litro, para reparto a domicilio vía
-camión) y `Recipientes` (precio por kilogramo, para consumidores que llevan
-su propio cilindro a la planta). Se confirmó mediante investigación externa
-que esta segunda modalidad —el consumidor lleva su cilindro y la planta lo
-llena cobrando por kg de diferencia entre el peso vacío y lleno— es una
-práctica real y común en México, y es la que corresponde al caso de un
-consumidor que "carga como gasolina", por lo que el proyecto usa
-`Recipientes` como fuente de precio.
+camión hacia un tanque estacionario) y `Recipientes` (precio por
+kilogramo, para consumidores que llevan su propio cilindro a la planta). El
+proyecto usa `AutoTanques`, ya que el caso final es ayudar a un consumidor
+que **no se traslada** — decide, desde su casa, a qué distribuidor pedirle
+que le manden el camión a llenar su tanque estacionario.
+
+(Se consideró previamente el escenario de `Recipientes`, para un consumidor
+que acude en persona a cargar su cilindro; se descartó a favor de este
+enfoque de reparto a domicilio, más representativo del uso típico de Gas LP
+en hogares mexicanos.)
 
 ## Hallazgo: inestabilidad de la API de la CNE
 

@@ -26,12 +26,12 @@ def _construir_prompt(resultados: list[ResultadoParada]) -> str:
     El LLM solo interpreta y redacta; no se le pide que invente cifras.
     """
     lineas = [
-        "Eres un asistente que ayuda a un consumidor común a decidir en qué "
-        "planta de distribución conviene cargar su cilindro de Gas LP.",
-        "A continuación tienes los precios por kilogramo (MXN) ya verificados, "
-        "por ubicación, incluyendo la capacidad del recipiente disponible. "
-        "No inventes precios, capacidades ni distribuidores que no aparezcan "
-        "en esta lista.",
+        "Eres un asistente que ayuda a un consumidor a decidir a qué "
+        "distribuidor de Gas LP pedirle que mande un camión (autotanque) a "
+        "su domicilio para llenar su tanque estacionario.",
+        "A continuación tienes los precios por litro (MXN) ya verificados, "
+        "por ubicación/zona. No inventes precios ni distribuidores que no "
+        "aparezcan en esta lista.",
         "",
     ]
 
@@ -41,20 +41,21 @@ def _construir_prompt(resultados: list[ResultadoParada]) -> str:
             f"municipio {resultado.parada.municipio_id}/"
             f"localidad {resultado.parada.localidad_id}"
         )
-        lineas.append(f"Ubicación: {etiqueta}")
+        lineas.append(f"Zona: {etiqueta}")
         if not resultado.distribuidores:
             lineas.append("  (sin distribuidores con precio válido reportado)")
         for d in resultado.distribuidores:
             lineas.append(
                 f"  - {d.marca_comercial} (permiso {d.numero_permiso}): "
-                f"${d.precio_kg:.2f}/kg (recipiente de {d.capacidad_kg:.0f} kg)"
+                f"${d.precio_litro:.2f}/litro"
             )
         lineas.append("")
 
     lineas.append(
-        "Redacta una recomendación breve (máximo 4 líneas) indicando en qué "
-        "ubicación y con qué distribuidor conviene cargar, y por qué, pensando "
-        "en un consumidor que va a cargar su propio cilindro."
+        "Redacta una recomendación breve (máximo 4 líneas) indicando a qué "
+        "distribuidor conviene pedirle el servicio a domicilio, y por qué, "
+        "pensando en un consumidor que quiere llenar su tanque estacionario "
+        "sin salir de casa."
     )
     return "\n".join(lineas)
 

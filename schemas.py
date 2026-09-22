@@ -1,7 +1,7 @@
 """
 Contrato de entrada/salida del servicio de comparación de precios de Gas LP
-por recipiente (cilindro), pensado para consumidores que acuden directamente
-a una planta de distribución a cargar, usando datos públicos de la CNE.
+para reparto a domicilio vía autotanque (llenado de tanque estacionario),
+usando datos públicos de la Comisión Nacional de Energía (CNE).
 """
 
 from datetime import datetime
@@ -20,7 +20,7 @@ class ParadaRuta(BaseModel):
 
 
 class ComparacionRutaGasLPRequest(BaseModel):
-    """Entrada del endpoint: una o más ubicaciones donde el consumidor podría cargar."""
+    """Entrada del endpoint: una o más ubicaciones (zonas) a comparar para pedir el camión."""
 
     paradas: list[ParadaRuta] = Field(
         ..., min_length=2, description="Al menos dos ubicaciones a comparar"
@@ -28,13 +28,12 @@ class ComparacionRutaGasLPRequest(BaseModel):
 
 
 class DistribuidorComparado(BaseModel):
-    """Un distribuidor de Gas LP por recipiente en una ubicación, con precio por kg."""
+    """Un distribuidor de Gas LP por autotanque (reparto a domicilio) en una ubicación."""
 
     numero_permiso: str
     marca_comercial: str
-    capacidad_kg: float = Field(..., gt=0, description="Capacidad del recipiente/cilindro, en kg")
-    precio_kg: float = Field(
-        ..., gt=0, le=60, description="Precio por kilogramo; excluye precios atípicos"
+    precio_litro: float = Field(
+        ..., gt=0, le=50, description="Precio por litro; excluye precios atípicos"
     )
     parada_etiqueta: str | None = None
 
@@ -44,8 +43,8 @@ class ResultadoParada(BaseModel):
 
     parada: ParadaRuta
     distribuidores: list[DistribuidorComparado]
-    precio_kg_minimo: float | None = None
-    precio_kg_promedio: float | None = None
+    precio_litro_minimo: float | None = None
+    precio_litro_promedio: float | None = None
 
 
 class TiemposDiagnostico(BaseModel):

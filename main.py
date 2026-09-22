@@ -1,7 +1,7 @@
 """
-Servicio HTTP: comparador de precios de Gas LP por recipiente para
-consumidores que cargan directamente en planta, usando datos públicos
-de la CNE y Gemini 3.5 Flash para la recomendación final.
+Servicio HTTP: comparador de precios de Gas LP por autotanque (reparto a
+domicilio para llenado de tanque estacionario), usando datos públicos de
+la CNE y Gemini 3.5 Flash para la recomendación final.
 """
 
 import os
@@ -14,7 +14,7 @@ from fastapi.responses import JSONResponse
 from langfuse import Langfuse, observe
 from openinference.instrumentation.google_genai import GoogleGenAIInstrumentor
 
-from cne_client import CNEAPIError, consultar_precios_recipiente
+from cne_client import CNEAPIError, consultar_precios_autotanque
 from llm_client import generar_recomendacion
 from schemas import (
     ComparacionRutaGasLPRequest,
@@ -30,8 +30,8 @@ langfuse = Langfuse()  # lee LANGFUSE_PUBLIC_KEY, LANGFUSE_SECRET_KEY, LANGFUSE_
 GoogleGenAIInstrumentor().instrument()
 
 app = FastAPI(
-    title="Comparador de precios de Gas LP por recipiente",
-    description="Consulta precios reportados a la CNE y recomienda dónde cargar Gas LP como consumidor.",
+    title="Comparador de precios de Gas LP a domicilio",
+    description="Consulta precios reportados a la CNE y recomienda a qué distribuidor pedir el camión a domicilio.",
     version="0.1.0",
 )
 
@@ -71,9 +71,10 @@ async def comparar_ruta(
     x_api_key: str | None = Header(default=None),
 ) -> ComparacionRutaGasLPResponse:
     """
-    Recibe una o más ubicaciones y devuelve, por cada una, los
-    distribuidores de Gas LP por recipiente con precio válido, más una
-    recomendación en texto generada por el LLM para un consumidor final.
+    Recibe una o más ubicaciones/zonas y devuelve, por cada una, los
+    distribuidores de Gas LP por autotanque con precio válido, más una
+    recomendación en texto generada por el LLM sobre a quién pedirle el
+    servicio a domicilio.
     """
     _verificar_autorizacion(x_api_key)
     trace_id = langfuse.get_current_trace_id()
@@ -86,7 +87,7 @@ async def comparar_ruta(
     for parada in request.paradas:
         inicio_cne = time.perf_counter()
         try:
-            distribuidores = await consultar_precios_recipiente(parada)
+            distribuidores = await consultar_precios_autotanque(parada)
         except CNEAPIError as exc:
             raise HTTPException(
                 status_code=502,
@@ -99,13 +100,13 @@ async def comparar_ruta(
         finally:
             tiempo_cne_s += time.perf_counter() - inicio_cne
 
-        precios = [d.precio_kg for d in distribuidores]
+        precios = [d.precio_litro for d in distribuidores]
         resultados.append(
             ResultadoParada(
                 parada=parada,
                 distribuidores=distribuidores,
-                precio_kg_minimo=min(precios) if precios else None,
-                precio_kg_promedio=(sum(precios) / len(precios)) if precios else None,
+                precio_litro_minimo=min(precios) if precios else None,
+                precio_litro_promedio=(sum(precios) / len(precios)) if precios else None,
             )
         )
 
