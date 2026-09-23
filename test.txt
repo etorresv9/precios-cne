@@ -29,3 +29,7 @@ curl -X POST http://127.0.0.1:8000/comparar-ruta \
       {"entidad_id": "05", "municipio_id": "035", "localidad_id": "143", "etiqueta": "Albia"}
     ]
   }'
+
+python3 medir.py
+pytest tests/test_contrato.py -v
+pytest tests/test_evaluacion_deepeval.py -v

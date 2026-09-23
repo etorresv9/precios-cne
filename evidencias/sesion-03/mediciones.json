@@ -1,10 +1,10 @@
 {
   "num_ejecuciones": 5,
-  "duracion_s_cliente_min": 7.411,
-  "duracion_s_cliente_max": 9.059,
-  "duracion_s_cliente_promedio": 7.877,
-  "tiempo_s_cne_promedio": 1.704,
-  "tiempo_s_llm_promedio": 6.097,
+  "duracion_s_cliente_min": 6.382,
+  "duracion_s_cliente_max": 8.788,
+  "duracion_s_cliente_promedio": 8.206,
+  "tiempo_s_cne_promedio": 1.744,
+  "tiempo_s_llm_promedio": 6.362,
   "condiciones": {
     "tipo": "ejecuciones secuenciales de la misma solicitud (no es prueba de carga)",
     "entorno": "local",
@@ -29,66 +29,66 @@
   "ejecuciones": [
     {
       "ejecucion": 1,
-      "fecha_hora_utc": "2026-09-22T04:11:22.525248+00:00",
+      "fecha_hora_utc": "2026-09-23T00:30:55.288478+00:00",
       "url": "http://127.0.0.1:8000/comparar-ruta",
       "codigo_http": 200,
-      "duracion_s_cliente": 9.059,
+      "duracion_s_cliente": 8.693,
       "tiempos_servidor": {
-        "tiempo_cne_s": 2.207,
-        "tiempo_llm_s": 6.706,
-        "tiempo_total_s": 8.913
+        "tiempo_cne_s": 1.587,
+        "tiempo_llm_s": 6.888,
+        "tiempo_total_s": 8.475
       },
       "error": null
     },
     {
       "ejecucion": 2,
-      "fecha_hora_utc": "2026-09-22T04:11:46.586210+00:00",
+      "fecha_hora_utc": "2026-09-23T00:31:18.986019+00:00",
       "url": "http://127.0.0.1:8000/comparar-ruta",
       "codigo_http": 200,
-      "duracion_s_cliente": 7.696,
+      "duracion_s_cliente": 8.674,
       "tiempos_servidor": {
-        "tiempo_cne_s": 1.552,
-        "tiempo_llm_s": 6.085,
-        "tiempo_total_s": 7.637
+        "tiempo_cne_s": 1.595,
+        "tiempo_llm_s": 6.972,
+        "tiempo_total_s": 8.567
       },
       "error": null
     },
     {
       "ejecucion": 3,
-      "fecha_hora_utc": "2026-09-22T04:12:09.286010+00:00",
+      "fecha_hora_utc": "2026-09-23T00:31:42.664259+00:00",
       "url": "http://127.0.0.1:8000/comparar-ruta",
       "codigo_http": 200,
-      "duracion_s_cliente": 7.411,
+      "duracion_s_cliente": 6.382,
       "tiempos_servidor": {
-        "tiempo_cne_s": 1.61,
-        "tiempo_llm_s": 5.739,
-        "tiempo_total_s": 7.35
+        "tiempo_cne_s": 1.606,
+        "tiempo_llm_s": 4.719,
+        "tiempo_total_s": 6.326
       },
       "error": null
     },
     {
       "ejecucion": 4,
-      "fecha_hora_utc": "2026-09-22T04:12:31.697275+00:00",
+      "fecha_hora_utc": "2026-09-23T00:32:04.047431+00:00",
       "url": "http://127.0.0.1:8000/comparar-ruta",
       "codigo_http": 200,
-      "duracion_s_cliente": 7.528,
+      "duracion_s_cliente": 8.788,
       "tiempos_servidor": {
-        "tiempo_cne_s": 1.558,
-        "tiempo_llm_s": 5.913,
-        "tiempo_total_s": 7.471
+        "tiempo_cne_s": 1.589,
+        "tiempo_llm_s": 7.142,
+        "tiempo_total_s": 8.731
       },
       "error": null
     },
     {
       "ejecucion": 5,
-      "fecha_hora_utc": "2026-09-22T04:12:54.228271+00:00",
+      "fecha_hora_utc": "2026-09-23T00:32:27.837722+00:00",
       "url": "http://127.0.0.1:8000/comparar-ruta",
       "codigo_http": 200,
-      "duracion_s_cliente": 7.693,
+      "duracion_s_cliente": 8.493,
       "tiempos_servidor": {
-        "tiempo_cne_s": 1.591,
-        "tiempo_llm_s": 6.044,
-        "tiempo_total_s": 7.634
+        "tiempo_cne_s": 2.344,
+        "tiempo_llm_s": 6.091,
+        "tiempo_total_s": 8.435
       },
       "error": null
     }
